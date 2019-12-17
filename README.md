@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # majajalist-frontend
 
 ## Project setup
