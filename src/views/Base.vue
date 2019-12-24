@@ -9,7 +9,6 @@
     <Footer />
   </v-app>
 </template>
-
 <script>
 import NavDrawer from "@/components/NavigationDrawer";
 import FloatButton from "@/components/FloatButton";
