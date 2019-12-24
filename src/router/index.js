@@ -1,19 +1,25 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import MainPage from "@/views/MainPage";
+import Base from "@/views/Base";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "mainpage",
-    component: MainPage
+    name: "base",
+    component: Base,
+    children: [
+      {
+        path: "/",
+        component: () => import("@/components/MainContent.vue")
+      }
+    ]
   },
   {
     path: "/test",
     name: "test",
-    component: () => import("@/components/NavigationDrawer")
+    component: () => import("@/components/NavigationDrawer.vue")
   }
 ];
 
