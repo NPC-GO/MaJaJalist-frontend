@@ -11,7 +11,7 @@
       v-model="fab"
     >
       <template v-slot:activator>
-        <v-btn color="blue darken-2" fab v-model="fab">
+        <v-btn color="deep-orange" fab v-model="fab">
           <v-icon v-if="fab">mdi-close</v-icon>
           <v-icon v-else>mdi-cat</v-icon>
         </v-btn>
