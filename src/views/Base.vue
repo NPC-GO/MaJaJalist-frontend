@@ -14,6 +14,8 @@ import NavDrawer from "@/components/NavigationDrawer";
 import FloatButton from "@/components/FloatButton";
 import ToolBar from "@/components/ToolBar";
 import Footer from "@/components/Footer";
+import query from "@/apis/query";
+const queryApi = query();
 export default {
   name: "base",
   components: {
