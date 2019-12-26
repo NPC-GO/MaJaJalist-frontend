@@ -62,7 +62,7 @@ export default {
       {
         router: "/unfinished",
         icon: "mdi-clipboard-alert",
-        text: "代辦事項",
+        text: "待辦事項",
         class: ""
       },
       {

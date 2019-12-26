@@ -10,8 +10,8 @@
             class="my-3"
           >
             <template v-slot:default="{ active }">
-              <v-icon :color="getIconColor(item.completed)" left>{{
-                getIcon(item.completed)
+              <v-icon :color="getIconColor(item.status)" left>{{
+                getIcon(item.status)
               }}</v-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="item.textContent" />
@@ -32,13 +32,35 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "maincontent",
   data: () => ({
-    inActiveItems: [],
-    items: [{ id: "123", textContent: "789", status: false, author: "npc-go" }]
+    inActiveItems: []
   }),
-  method: {}
+  methods: {
+    getIcon(type) {
+      let icon;
+      if (type === "unFinished") {
+        icon = "mdi-alert-circle-outline";
+      } else if (type === "completed") {
+        icon = "mdi-check-circle-outline";
+      }
+      return icon;
+    },
+    getIconColor(type) {
+      let iconColor;
+      if (type === "unFinished") {
+        iconColor = "red";
+      } else if (type === "completed") {
+        iconColor = "green";
+      }
+      return iconColor;
+    }
+  },
+  computed: {
+    ...mapGetters({ items: "getTodo" })
+  }
 };
 </script>
 

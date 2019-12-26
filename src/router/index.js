@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import BaseView from "@/views/BaseView";
-
+import MainContent from "@/components/MainContent.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -12,14 +12,9 @@ const routes = [
     children: [
       {
         path: "/",
-        component: () => import("@/components/MainContent.vue")
+        component: MainContent
       }
     ]
-  },
-  {
-    path: "/test",
-    name: "test",
-    component: () => import("@/components/NavigationDrawer.vue")
   }
 ];
 

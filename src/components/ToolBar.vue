@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app clipped-left color="deep-purple accent-4" dark>
     <v-app-bar-nav-icon @click.stop="onDrawerClicked" />
-    <v-toolbar-title>
+    <v-toolbar-title class="font-weight-black">
       <b>MaJaJaList</b>
     </v-toolbar-title>
     <v-spacer />

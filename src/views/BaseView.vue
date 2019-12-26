@@ -4,6 +4,7 @@
     <ToolBar @onDrawerClicked="onDrawerClicked"></ToolBar>
     <v-content>
       <router-view ref="child" />
+      <bg />
     </v-content>
     <FloatButton />
     <FooterCard />
@@ -14,15 +15,15 @@ import NavDrawer from "@/components/NavigationDrawer";
 import FloatButton from "@/components/FloatButton";
 import ToolBar from "@/components/ToolBar";
 import FooterCard from "@/components/FooterCard";
-import query from "@/apis/query";
-const queryApi = query();
+import bg from "@/components/MainContentBackground";
 export default {
   name: "baseview",
   components: {
     NavDrawer,
     FloatButton,
     ToolBar,
-    FooterCard
+    FooterCard,
+    bg
   },
   methods: {
     onDrawerClicked() {
