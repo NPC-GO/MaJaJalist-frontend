@@ -14,7 +14,7 @@
                 getIcon(item.completed)
               }}</v-icon>
               <v-list-item-content>
-                <v-list-item-title v-text="item.content" />
+                <v-list-item-title v-text="item.textContent" />
               </v-list-item-content>
               <v-list-item-action>
                 <v-checkbox
@@ -36,8 +36,9 @@ export default {
   name: "maincontent",
   data: () => ({
     inActiveItems: [],
-    items: []
-  })
+    items: [{ id: "123", textContent: "789", status: false, author: "npc-go" }]
+  }),
+  method: {}
 };
 </script>
 

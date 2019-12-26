@@ -9,28 +9,10 @@
       :top="top"
       class="my-7"
       v-model="fab"
+      v-slot:activator
     >
-      <template v-slot:activator>
-        <v-btn color="deep-orange" fab v-model="fab">
-          <v-icon v-if="fab">mdi-close</v-icon>
-          <v-icon v-else>mdi-cat</v-icon>
-        </v-btn>
-      </template>
-      <v-btn v-show="true" color="indigo" fab small>
+      <v-btn color="deep-orange" fab v-show="!hidden">
         <v-icon>mdi-plus</v-icon>
-      </v-btn>
-      <v-btn :disabled="false" v-show="true" color="green" fab small>
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
-
-      <v-btn v-show="true" color="red" :disabled="false" fab small>
-        <v-icon>mdi-delete</v-icon>
-      </v-btn>
-      <v-btn v-show="true" color="amber" :disabled="false" fab small>
-        <v-icon>mdi-delete-restore</v-icon>
-      </v-btn>
-      <v-btn v-show="true" color="amber" :disabled="false" fab small>
-        <v-icon>mdi-autorenew</v-icon>
       </v-btn>
     </v-speed-dial>
   </v-card>
@@ -46,7 +28,8 @@ export default {
     left: false,
     direction: "top",
     fab: false,
-    hover: true
+    hover: true,
+    hidden: false
   }),
   watch: {
     top(val) {

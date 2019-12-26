@@ -6,23 +6,23 @@
       <router-view ref="child" />
     </v-content>
     <FloatButton />
-    <Footer />
+    <FooterCard />
   </v-app>
 </template>
 <script>
 import NavDrawer from "@/components/NavigationDrawer";
 import FloatButton from "@/components/FloatButton";
 import ToolBar from "@/components/ToolBar";
-import Footer from "@/components/Footer";
+import FooterCard from "@/components/FooterCard";
 import query from "@/apis/query";
 const queryApi = query();
 export default {
-  name: "base",
+  name: "baseview",
   components: {
     NavDrawer,
     FloatButton,
     ToolBar,
-    Footer
+    FooterCard
   },
   methods: {
     onDrawerClicked() {

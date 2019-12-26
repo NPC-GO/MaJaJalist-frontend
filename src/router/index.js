@@ -1,14 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Base from "@/views/Base";
+import BaseView from "@/views/BaseView";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "base",
-    component: Base,
+    name: "baseview",
+    component: BaseView,
     children: [
       {
         path: "/",

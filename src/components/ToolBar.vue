@@ -5,6 +5,9 @@
       <b>MaJaJaList</b>
     </v-toolbar-title>
     <v-spacer />
+    <v-btn icon>
+      <v-icon>mdi-pencil</v-icon>
+    </v-btn>
     <v-menu right bottom>
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
