@@ -1,9 +1,9 @@
+/*jshint -W024 */
 import Vue from "vue";
 import Vuex from "vuex";
-import query from "@/apis/query";
+const query = () => import("@/apis/query");
+const mutation = () => import("@/apis/mutation");
 Vue.use(Vuex);
-
-const apiQuery = query();
 export default new Vuex.Store({
   state: {
     Todo: (() => {

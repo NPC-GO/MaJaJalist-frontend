@@ -1,16 +1,11 @@
+/*jshint -W024 */
 import Vue from "vue";
 import VueRouter from "vue-router";
-/*jshint -W024 */
 const BaseView = () => import("@/views/BaseView");
-/*jshint -W024 */
 const MainContent = () => import("@/components/MainContent");
-/*jshint -W024 */
 const NotDonePage = () => import("@/components/NotDonePage");
-/*jshint -W024 */
 const DonePage = () => import("@/components/DonePage");
-/*jshint -W024 */
 const TrashCan = () => import("@/components/TrashCan");
-/*jshint -W024 */
 const Settings = () => import("@/components/Settings");
 
 Vue.use(VueRouter);

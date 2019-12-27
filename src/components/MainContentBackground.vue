@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    class="fill-height"
-    fluid
-    v-show="!pageDConfig.itemsLengthInCurrentPage"
-  >
+  <v-container class="fill-height" fluid v-show="!empty">
     <v-row align="center" justify="center">
       <v-col align="center" justify="center">
         <v-img
@@ -19,11 +15,26 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
   name: "maincontentbackground",
   computed: {
-    ...mapGetters({ pageDConfig: "getPageDynamicConfig" })
+    now() {
+      console.log(this.$router.currentRoute.name);
+      return this.$router.currentRoute.name;
+    },
+    empty() {
+      if (this.now === "maincontent") {
+        return this.$store.getters.getTodo.length;
+      } else if (this.now === "notdonepage") {
+        return this.$store.getters.getUnfinishedTodo.length;
+      } else if (this.now === "donepage") {
+        return this.$store.getters.getFinishedTodo.length;
+      } else if (this.now === "trashcan") {
+        return this.$store.getters.getDeletedTodo.length;
+      } else {
+        return false;
+      }
+    }
   }
 };
 </script>
