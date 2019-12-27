@@ -54,8 +54,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch("setPageDynamicConfig", {
-      name: "itemsLengthInCurrentPage",
-      data: this.items.length
+      name: "currentPage",
+      data: this.$router.currentRoute.name
     });
   }
 };

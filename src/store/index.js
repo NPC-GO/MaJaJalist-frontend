@@ -11,7 +11,7 @@ export default new Vuex.Store({
         {
           id: "123",
           textContent: "test",
-          status: { completed: true, deleted: true, readonly: false },
+          status: { completed: true, deleted: false, readonly: false },
           author: "npcgo",
           sort: 0
         }
@@ -30,8 +30,8 @@ export default new Vuex.Store({
       };
     })(),
     pageDynamicConfig: {
-      itemsLengthInCurrentPage: 0,
-      editorDialogStatus: false
+      editorDialogStatus: false,
+      currentPage: null
     }
   },
   mutations: {
@@ -63,6 +63,9 @@ export default new Vuex.Store({
     },
     getPageDynamicConfig(state) {
       return state.pageDynamicConfig;
+    },
+    getCurrentRouterName(state) {
+      return state.pageDynamicConfig.currentPage;
     }
   },
   modules: {}

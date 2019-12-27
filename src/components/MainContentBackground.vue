@@ -15,13 +15,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "maincontentbackground",
   computed: {
-    now() {
-      console.log(this.$router.currentRoute.name);
-      return this.$router.currentRoute.name;
-    },
+    ...mapGetters({ now: "getCurrentRouterName" }),
     empty() {
       if (this.now === "maincontent") {
         return this.$store.getters.getTodo.length;
@@ -32,7 +30,7 @@ export default {
       } else if (this.now === "trashcan") {
         return this.$store.getters.getDeletedTodo.length;
       } else {
-        return false;
+        return true;
       }
     }
   }
