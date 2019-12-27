@@ -11,11 +11,11 @@
   </v-app>
 </template>
 <script>
-import NavDrawer from "@/components/NavigationDrawer";
-import FloatButton from "@/components/FloatButton";
-import ToolBar from "@/components/ToolBar";
-import FooterCard from "@/components/FooterCard";
-import bg from "@/components/MainContentBackground";
+const NavDrawer = () => import("@/components/NavigationDrawer");
+const FloatButton = () => import("@/components/FloatButton");
+const ToolBar = () => import("@/components/ToolBar");
+const FooterCard = () => import("@/components/FooterCard");
+const bg = () => import("@/components/MainContentBackground");
 export default {
   name: "baseview",
   components: {

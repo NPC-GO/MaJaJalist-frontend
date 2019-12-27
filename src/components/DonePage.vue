@@ -34,7 +34,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "maincontent",
+  name: "donepage",
   data: () => ({
     inActiveItems: []
   }),
@@ -59,13 +59,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ items: "getTodo" })
-  },
-  mounted() {
-    this.$store.dispatch("setPageDynamicConfig", {
-      name: "itemsLengthInCurrentPage",
-      data: this.items.length
-    });
+    ...mapGetters({ items: "getFinishedTodo" })
   }
 };
 </script>
