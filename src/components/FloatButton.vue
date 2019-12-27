@@ -11,7 +11,7 @@
       v-model="fab"
       v-slot:activator
     >
-      <v-btn color="deep-orange" fab v-show="!hidden">
+      <v-btn color="deep-orange" fab v-show="!hidden" @click.stop="onClicked">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -43,6 +43,11 @@ export default {
     },
     left(val) {
       this.right = !val;
+    }
+  },
+  methods: {
+    onClicked() {
+      this.$emit("onClick");
     }
   }
 };

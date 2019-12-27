@@ -6,7 +6,8 @@
       <router-view ref="child" />
       <bg />
     </v-content>
-    <FloatButton />
+    <FloatButton @onClick="onAddButonClicked" />
+    <EDialog />
     <FooterCard />
   </v-app>
 </template>
@@ -16,6 +17,7 @@ const FloatButton = () => import("@/components/FloatButton");
 const ToolBar = () => import("@/components/ToolBar");
 const FooterCard = () => import("@/components/FooterCard");
 const bg = () => import("@/components/MainContentBackground");
+const EDialog = () => import("@/components/EditorDialog");
 export default {
   name: "baseview",
   components: {
@@ -23,11 +25,18 @@ export default {
     FloatButton,
     ToolBar,
     FooterCard,
-    bg
+    bg,
+    EDialog
   },
   methods: {
     onDrawerClicked() {
       this.$refs.navdr.onDrawerClicked();
+    },
+    onAddButonClicked() {
+      this.$store.dispatch("setPageDynamicConfig", {
+        name: "editorDialogStatus",
+        data: true
+      });
     }
   }
 };

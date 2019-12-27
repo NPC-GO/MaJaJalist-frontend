@@ -60,6 +60,12 @@ export default {
   },
   computed: {
     ...mapGetters({ items: "getUnfinishedTodo" })
+  },
+  mounted() {
+    this.$store.dispatch("setPageDynamicConfig", {
+      name: "itemsLengthInCurrentPage",
+      data: this.items.length
+    });
   }
 };
 </script>

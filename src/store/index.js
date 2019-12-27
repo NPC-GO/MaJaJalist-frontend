@@ -11,7 +11,7 @@ export default new Vuex.Store({
         {
           id: "123",
           textContent: "test",
-          status: { completed: false, deleted: false, readonly: false },
+          status: { completed: true, deleted: true, readonly: false },
           author: "npcgo",
           sort: 0
         }
@@ -30,7 +30,8 @@ export default new Vuex.Store({
       };
     })(),
     pageDynamicConfig: {
-      itemsLengthInCurrentPage: 0
+      itemsLengthInCurrentPage: 0,
+      editorDialogStatus: false
     }
   },
   mutations: {
@@ -45,16 +46,20 @@ export default new Vuex.Store({
   },
   getters: {
     getUnfinishedTodo({ Todo }) {
-      return Todo.filter(data => data.status.completed === false);
+      return Todo.filter(
+        data => data.status.completed === false && data.status.deleted === false
+      );
     },
     getFinishedTodo({ Todo }) {
-      return Todo.filter(data => data.status.completed === true);
+      return Todo.filter(
+        data => data.status.completed === true && data.status.deleted === false
+      );
     },
     getDeletedTodo({ Todo }) {
       return Todo.filter(data => data.status.deleted === true);
     },
     getTodo({ Todo }) {
-      return Todo;
+      return Todo.filter(data => data.status.deleted === false);
     },
     getPageDynamicConfig(state) {
       return state.pageDynamicConfig;

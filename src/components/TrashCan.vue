@@ -51,6 +51,12 @@ export default {
   },
   computed: {
     ...mapGetters({ items: "getDeletedTodo" })
+  },
+  mounted() {
+    this.$store.dispatch("setPageDynamicConfig", {
+      name: "itemsLengthInCurrentPage",
+      data: this.items.length
+    });
   }
 };
 </script>
