@@ -7,7 +7,7 @@
       <bg />
     </v-content>
     <FloatButton @onClick="onAddButonClicked" />
-    <EDialog />
+    <EDialog :key="pageDConfig.editorDialogKey" />
     <FooterCard />
   </v-app>
 </template>
@@ -18,6 +18,7 @@ const ToolBar = () => import("@/components/ToolBar");
 const FooterCard = () => import("@/components/FooterCard");
 const bg = () => import("@/components/MainContentBackground");
 const EDialog = () => import("@/components/EditorDialog");
+import { mapGetters } from "vuex";
 export default {
   name: "baseview",
   components: {
@@ -33,11 +34,18 @@ export default {
       this.$refs.navdr.onDrawerClicked();
     },
     onAddButonClicked() {
+      this.pageDConfig.editorDialogKey++;
       this.$store.dispatch("setPageDynamicConfig", {
         name: "editorDialogStatus",
         data: true
       });
     }
+  },
+  computed: {
+    ...mapGetters({ pageDConfig: "getPageDynamicConfig" })
+  },
+  mounted() {
+    this.$vuetify.theme.dark = true;
   }
 };
 </script>

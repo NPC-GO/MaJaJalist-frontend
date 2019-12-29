@@ -1,5 +1,5 @@
 <template>
-  <v-list shaped v-show="items.length" class="transparent mx-2">
+  <v-list disabled v-show="items.length" class="transparent mx-2">
     <v-list-item-group multiple v-model="inActiveItems">
       <template v-for="item in items">
         <v-card :key="`${item.id}`">
@@ -18,11 +18,18 @@
               </v-list-item-content>
               <v-list-item-action>
                 <v-checkbox
+                  v-show="false"
                   :input-value="active"
                   :true-value="item"
                   color="white"
                 />
               </v-list-item-action>
+              <!-- <v-btn small sm outlined color="success">
+                Verified
+              </v-btn> -->
+              <div class="mx-2" right style="color:gray">
+                {{ "@" + "npcgo" }}
+              </div>
             </template>
           </v-list-item>
         </v-card>
