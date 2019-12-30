@@ -30,7 +30,8 @@ export default new Vuex.Store({
     pageDynamicConfig: {
       editorDialogStatus: false,
       editorDialogKey: -1,
-      currentPage: null
+      currentPage: null,
+      selectedItemInCurrentPage: []
     }
   },
   mutations: {

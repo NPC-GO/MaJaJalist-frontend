@@ -42,6 +42,11 @@ const routes = [
         component: Settings
       }
     ]
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: () => import("@/components/tmp")
   }
 ];
 

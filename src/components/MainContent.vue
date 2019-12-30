@@ -1,5 +1,5 @@
 <template>
-  <v-list disabled v-show="items.length" class="transparent mx-2">
+  <v-list v-show="items.length" class="transparent mx-2">
     <v-list-item-group multiple v-model="inActiveItems">
       <template v-for="item in items">
         <v-card :key="`${item.id}`">
@@ -8,6 +8,8 @@
             :value="item.id"
             active-class="amber"
             class="my-3"
+            transition="scroll-y-transition"
+            @click.stop="onItemClick"
           >
             <template v-slot:default="{ active }">
               <v-icon :color="getIconColor(item.status.completed)" left>{{
@@ -18,15 +20,12 @@
               </v-list-item-content>
               <v-list-item-action>
                 <v-checkbox
-                  v-show="false"
+                  v-show="true"
                   :input-value="active"
                   :true-value="item"
                   color="white"
                 />
               </v-list-item-action>
-              <!-- <v-btn small sm outlined color="success">
-                Verified
-              </v-btn> -->
               <div class="mx-2" right style="color:gray">
                 {{ "@" + "npcgo" }}
               </div>
@@ -63,6 +62,14 @@ export default {
         iconColor = "green";
       }
       return iconColor;
+    },
+    onItemClick() {
+      this.$nextTick(() => {
+        this.$store.dispatch("setPageDynamicConfig", {
+          name: "selectedItemInCurrentPage",
+          data: this.inActiveItems
+        });
+      });
     }
   },
   computed: {

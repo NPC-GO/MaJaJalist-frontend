@@ -1,8 +1,11 @@
 <template>
   <v-app id="inspire">
     <NavDrawer ref="navdr" />
-    <ToolBar @onDrawerClicked="onDrawerClicked"></ToolBar>
-    <v-content>
+    <ToolBar
+      @clearSelection="clearSelection"
+      @onDrawerClicked="onDrawerClicked"
+    ></ToolBar>
+    <v-content transition="scroll-y-transition">
       <router-view ref="child" />
       <bg />
     </v-content>
@@ -39,6 +42,9 @@ export default {
         name: "editorDialogStatus",
         data: true
       });
+    },
+    clearSelection() {
+      this.$refs.child["inActiveItems"] = [];
     }
   },
   computed: {
