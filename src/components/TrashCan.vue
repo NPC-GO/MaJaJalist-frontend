@@ -71,6 +71,14 @@ export default {
       name: "currentPage",
       data: this.$router.currentRoute.name
     });
+    this.$store.dispatch("setPageDynamicConfig", {
+      name: "selectedItemInCurrentPage",
+      data: []
+    });
+    this.$store.dispatch("setPageDynamicConfig", {
+      name: "selectionMode",
+      data: false
+    });
   }
 };
 </script>

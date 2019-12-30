@@ -31,7 +31,8 @@ export default new Vuex.Store({
       editorDialogStatus: false,
       editorDialogKey: -1,
       currentPage: null,
-      selectedItemInCurrentPage: []
+      selectedItemInCurrentPage: [],
+      selectionMode: false
     }
   },
   mutations: {
