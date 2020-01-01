@@ -2,11 +2,12 @@
   <v-app id="inspire">
     <NavDrawer ref="navdr" />
     <ToolBar
+      ref="toptoolbar"
       @clearSelection="clearSelection"
       @onDrawerClicked="onDrawerClicked"
     ></ToolBar>
     <v-content transition="scroll-y-transition">
-      <router-view ref="child" />
+      <router-view @itemsPageInit="itemsPageInit" ref="child" />
       <bg />
     </v-content>
     <FloatButton @onClick="onAddButonClicked" />
@@ -35,6 +36,7 @@ export default {
   methods: {
     onDrawerClicked() {
       this.$refs.navdr.onDrawerClicked();
+      console.log("13213213");
     },
     onAddButonClicked() {
       this.pageDConfig.editorDialogKey++;
@@ -45,6 +47,21 @@ export default {
     },
     clearSelection() {
       this.$refs.child["inActiveItems"] = [];
+    },
+    itemsPageInit() {
+      this.$store.dispatch("setPageDynamicConfig", {
+        name: "currentPage",
+        data: this.$router.currentRoute.name
+      });
+      this.$store.dispatch("setPageDynamicConfig", {
+        name: "selectedItemInCurrentPage",
+        data: []
+      });
+      this.$store.dispatch("setPageDynamicConfig", {
+        name: "selectionMode",
+        data: false
+      });
+      this.$refs.toptoolbar.clrSelection();
     }
   },
   computed: {

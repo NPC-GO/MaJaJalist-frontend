@@ -1,5 +1,9 @@
 <template>
-  <v-list v-show="items.length" class="transparent mx-2">
+  <v-list
+    :disabled="!pageDConfig.selectionMode"
+    v-show="items.length"
+    class="transparent mx-2"
+  >
     <v-list-item-group multiple v-model="inActiveItems">
       <template v-for="item in items">
         <v-card :key="`${item.id}`">
@@ -19,16 +23,20 @@
                 <v-list-item-title v-text="item.textContent" />
               </v-list-item-content>
               <v-list-item-action>
-                <v-checkbox
-                  v-show="true"
-                  :input-value="active"
-                  :true-value="item"
-                  color="white"
-                />
+                <v-scale-transition>
+                  <v-checkbox
+                    v-show="pageDConfig.selectionMode"
+                    :input-value="active"
+                    :true-value="item"
+                    color="white"
+                  />
+                </v-scale-transition>
               </v-list-item-action>
-              <div class="mx-2" right style="color:gray">
-                {{ "@" + "npcgo" }}
-              </div>
+              <v-scale-transition>
+                <div class="mx-2" right style="color:gray">
+                  {{ "@" + "npcgo" }}
+                </div>
+              </v-scale-transition>
             </template>
           </v-list-item>
         </v-card>
@@ -73,21 +81,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ items: "getTodo" })
+    ...mapGetters({ items: "getTodo", pageDConfig: "getPageDynamicConfig" })
   },
   mounted() {
-    this.$store.dispatch("setPageDynamicConfig", {
-      name: "currentPage",
-      data: this.$router.currentRoute.name
-    });
-    this.$store.dispatch("setPageDynamicConfig", {
-      name: "selectedItemInCurrentPage",
-      data: []
-    });
-    this.$store.dispatch("setPageDynamicConfig", {
-      name: "selectionMode",
-      data: false
-    });
+    this.$emit("itemsPageInit");
   }
 };
 </script>

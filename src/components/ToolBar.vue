@@ -11,7 +11,7 @@
       v-if="!pageDConfig.selectionMode"
       @click.stop="onDrawerClicked"
     />
-    <v-btn v-else icon @click.stop="clearSelection">
+    <v-btn v-else icon @click.stop="clrSelection">
       <v-icon>mdi-close</v-icon>
     </v-btn>
     <v-toolbar-title class="font-weight-black">
@@ -45,10 +45,10 @@
       </template>
       <v-list>
         <v-list-item
-          :disabled="!n.status"
+          v-show="n.status"
           v-for="(n, i) in options"
           :key="i"
-          @click="onMenuClicked"
+          @click="onMenuClicked(n)"
         >
           <v-icon class="mx-2" :color="n.status ? 'default' : 'gray'">{{
             n.icon
@@ -67,6 +67,12 @@ export default {
   data: () => ({
     options: [
       {
+        name: "新增項目",
+        event: "add",
+        icon: "mdi-plus",
+        status: true
+      },
+      {
         name: "選取項目",
         event: "edit",
         icon: "mdi-checkbox-multiple-blank-outline",
@@ -75,10 +81,7 @@ export default {
     ]
   }),
   methods: {
-    onDrawerClicked() {
-      this.$emit("onDrawerClicked");
-    },
-    clearSelection() {
+    clrSelection() {
       this.$store.dispatch("setPageDynamicConfig", {
         name: "selectedItemInCurrentPage",
         data: []
@@ -88,9 +91,19 @@ export default {
         data: false
       });
       this.$emit("clearSelection");
+      this.options[1].status = true;
     },
-    onMenuClicked() {
-      this.$store.dispatch("setPageDynamicConfig", {
+    onDrawerClicked() {
+      this.$emit("onDrawerClicked");
+    },
+    onMenuClicked(option) {
+      if (option.event === "edit") {
+        this.editClicked(option);
+      }
+    },
+    async editClicked(option) {
+      option.status = false;
+      await this.$store.dispatch("setPageDynamicConfig", {
         name: "selectionMode",
         data: true
       });
