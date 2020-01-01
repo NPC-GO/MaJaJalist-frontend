@@ -16,7 +16,7 @@
             @click.stop="onItemClick"
           >
             <template v-slot:default="{ active }">
-              <v-icon :color="getIconColor(item.status.completed)" left>{{
+              <v-icon color="grey" left>{{
                 getIcon(item.status.completed)
               }}</v-icon>
               <v-list-item-content>
@@ -48,28 +48,17 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "maincontent",
+  name: "trashcan",
   data: () => ({
     inActiveItems: []
   }),
   methods: {
     getIcon(type) {
-      let icon;
       if (type === false) {
-        icon = "mdi-alert-circle-outline";
+        return "mdi-alert-circle-outline";
       } else if (type === true) {
-        icon = "mdi-check-circle-outline";
+        return "mdi-check-circle-outline";
       }
-      return icon;
-    },
-    getIconColor(type) {
-      let iconColor;
-      if (type === false) {
-        iconColor = "red";
-      } else if (type === true) {
-        iconColor = "green";
-      }
-      return iconColor;
     },
     onItemClick() {
       this.$nextTick(() => {
@@ -81,7 +70,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ items: "getTodo", pageDConfig: "getPageDynamicConfig" })
+    ...mapGetters({
+      items: "getDeletedTodo",
+      pageDConfig: "getPageDynamicConfig"
+    })
   },
   mounted() {
     this.$emit("itemsPageInit");

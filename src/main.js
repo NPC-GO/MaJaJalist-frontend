@@ -7,6 +7,23 @@ import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
 
+// Vue.mixin({
+//   mounted() {
+//     this.$store.dispatch("setPageDynamicConfig", {
+//       name: "currentPage",
+//       data: this.$router.currentRoute.name
+//     });
+//     this.$store.dispatch("setPageDynamicConfig", {
+//       name: "selectedItemInCurrentPage",
+//       data: []
+//     });
+//     this.$store.dispatch("setPageDynamicConfig", {
+//       name: "selectionMode",
+//       data: false
+//     });
+//   }
+// });
+
 new Vue({
   router,
   store,

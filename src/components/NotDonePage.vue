@@ -48,7 +48,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "maincontent",
+  name: "notdonepage",
   data: () => ({
     inActiveItems: []
   }),
@@ -81,7 +81,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ items: "getTodo", pageDConfig: "getPageDynamicConfig" })
+    ...mapGetters({
+      items: "getUnfinishedTodo",
+      pageDConfig: "getPageDynamicConfig"
+    })
   },
   mounted() {
     this.$emit("itemsPageInit");

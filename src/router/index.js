@@ -1,25 +1,52 @@
+/*jshint -W024 */
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Base from "@/views/Base";
+const BaseView = () => import("@/views/BaseView");
+const MainContent = () => import("@/components/MainContent");
+const NotDonePage = () => import("@/components/NotDonePage");
+const DonePage = () => import("@/components/DonePage");
+const TrashCan = () => import("@/components/TrashCan");
+const Settings = () => import("@/components/Settings");
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "base",
-    component: Base,
+    name: "baseview",
+    component: BaseView,
     children: [
       {
+        name: "maincontent",
         path: "/",
-        component: () => import("@/components/MainContent.vue")
+        component: MainContent
+      },
+      {
+        name: "notdonepage",
+        path: "/unfinished",
+        component: NotDonePage
+      },
+      {
+        name: "donepage",
+        path: "/finished",
+        component: DonePage
+      },
+      {
+        name: "trashcan",
+        path: "/trashcan",
+        component: TrashCan
+      },
+      {
+        name: "settings",
+        path: "/settings",
+        component: Settings
       }
     ]
   },
   {
     path: "/test",
     name: "test",
-    component: () => import("@/components/NavigationDrawer.vue")
+    component: () => import("@/components/tmp")
   }
 ];
 
