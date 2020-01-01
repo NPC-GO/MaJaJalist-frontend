@@ -16,7 +16,7 @@
             @click.stop="onItemClick"
           >
             <template v-slot:default="{ active }">
-              <v-icon color="gray" left>{{
+              <v-icon color="grey" left>{{
                 getIcon(item.status.completed)
               }}</v-icon>
               <v-list-item-content>
@@ -54,13 +54,11 @@ export default {
   }),
   methods: {
     getIcon(type) {
-      let icon;
       if (type === false) {
-        icon = "mdi-alert-circle-outline";
+        return "mdi-alert-circle-outline";
       } else if (type === true) {
-        icon = "mdi-check-circle-outline";
+        return "mdi-check-circle-outline";
       }
-      return icon;
     },
     onItemClick() {
       this.$nextTick(() => {

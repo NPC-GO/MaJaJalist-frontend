@@ -49,7 +49,12 @@ export default new Vuex.Store({
     CHANGE_TODO(state, data) {
       let item = state.Todos[`${data.index}`];
       item.textContent = data.data.textContent || item.textContent;
-      item.status.completed = data.data.status.completed;
+      item.status.completed = (function() {
+        if (data.data.status.completed === "origin") {
+          return item.status.completed;
+        }
+        return data.data.status.completed;
+      })();
       item.status.deleted = data.data.status.deleted || item.status.deleted;
       item.status.readonly = data.data.status.readonly || item.status.readonly;
       item.author = data.data.author || item.author;

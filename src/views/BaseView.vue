@@ -12,7 +12,10 @@
       <router-view @itemsPageInit="itemsPageInit" ref="child" />
       <bg />
     </v-content>
-    <FloatButton @onClick="onAddButonClicked" />
+    <FloatButton
+      v-show="floatButtonShowRealTime"
+      @onClick="onAddButonClicked"
+    />
     <EDialog :key="pageDConfig.editorDialogKey" />
     <FooterCard />
   </v-app>
@@ -91,14 +94,31 @@ export default {
       } catch (e) {
         return;
       }
+    },
+    floatButtonShow() {
+      let dontShow = ["trashcan"];
+      let show = dontShow.findIndex(x => x === this.currentRoute);
+      if (show === -1) {
+        return true;
+      }
+      return false;
     }
   },
   computed: {
     ...mapGetters({
       pageDConfig: "getPageDynamicConfig",
       selectedItemIndex: "getSelectionItemsByIndex",
-      items: "getTodo"
-    })
+      items: "getTodo",
+      now: "getCurrentRouterName"
+    }),
+    floatButtonShowRealTime() {
+      let dontShow = ["trashcan", "settings"];
+      let show = dontShow.findIndex(x => x === this.now);
+      if (show === -1) {
+        return true;
+      }
+      return false;
+    }
   },
   mounted() {
     this.$vuetify.theme.dark = true;

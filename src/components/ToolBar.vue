@@ -47,6 +47,7 @@
         v-if="pageDConfig.selectedItemInCurrentPage.length"
         key="delete"
         icon
+        @click.stop="pushSelectedTrashcan"
       >
         <v-icon>mdi-delete</v-icon>
       </v-btn>
@@ -156,6 +157,17 @@ export default {
         actions.push({
           index: element,
           data: { status: { completed: false } }
+        });
+      });
+      this.clrSelection();
+      this.$store.dispatch("changeTodo", actions);
+    },
+    pushSelectedTrashcan() {
+      let actions = [];
+      this.SelectionItemsByIndex.forEach(element => {
+        actions.push({
+          index: element,
+          data: { status: { deleted: true, completed: "origin" } }
         });
       });
       this.clrSelection();
