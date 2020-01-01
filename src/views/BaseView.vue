@@ -82,7 +82,11 @@ export default {
         name: "selectionMode",
         data: false
       });
-      this.$refs.toptoolbar.clrSelection();
+      try {
+        this.$refs.toptoolbar.clrSelection();
+      } catch (e) {
+        return;
+      }
     }
   },
   computed: {
