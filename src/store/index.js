@@ -33,7 +33,8 @@ export default new Vuex.Store({
       currentPage: null,
       selectedItemInCurrentPage: [],
       selectionMode: false
-    }
+    },
+    editorDialogConfig: { mode: true, text: "", checked: false }
   },
   mutations: {
     SET_PAGE_DYNAMIC_CONFIG(state, data) {
@@ -41,11 +42,25 @@ export default new Vuex.Store({
     },
     ADD_TODO(state, data) {
       state.Todos.unshift(data);
+    },
+    SET_EDITOR_DIALOG_CONFIG(state, data) {
+      state.editorDialogConfig = data;
+    },
+    CHANGE_TODO(state, data) {
+      let item = state.Todos[`${data.index}`];
+      item.textContent = data.data.textContent || item.textContent;
+      item.status.completed = data.data.status.completed;
+      item.status.deleted = data.data.status.deleted || item.status.deleted;
+      item.status.readonly = data.data.status.readonly || item.status.readonly;
+      item.author = data.data.author || item.author;
     }
   },
   actions: {
     setPageDynamicConfig({ commit }, data) {
       commit("SET_PAGE_DYNAMIC_CONFIG", data);
+    },
+    setEditorDialogConfig({ commit }, data) {
+      commit("SET_EDITOR_DIALOG_CONFIG", data);
     },
     addTodo({ commit, state }, data) {
       data.id = require("js-sha256").sha256(data.textContent + Date.now());
@@ -53,6 +68,9 @@ export default new Vuex.Store({
       data.status.deleted = false;
       data.status.readonly = false;
       commit("ADD_TODO", data);
+    },
+    changeTodo({ commit }, data) {
+      data.forEach(element => commit("CHANGE_TODO", element));
     }
   },
   getters: {
@@ -77,6 +95,17 @@ export default new Vuex.Store({
     },
     getCurrentRouterName(state) {
       return state.pageDynamicConfig.currentPage;
+    },
+    getEditorDialogConfig(state) {
+      return state.editorDialogConfig;
+    },
+    getSelectionItemsByIndex(state) {
+      let list = state.pageDynamicConfig.selectedItemInCurrentPage;
+      let listByItem = [];
+      list.forEach(element =>
+        listByItem.push(list.findIndex(x => x === element))
+      );
+      return listByItem;
     }
   },
   modules: {}

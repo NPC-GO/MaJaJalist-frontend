@@ -37,6 +37,7 @@
         v-if="pageDConfig.selectedItemInCurrentPage.length === 1"
         key="edit"
         icon
+        @click="editItem"
       >
         <v-icon color="amber">mdi-pencil</v-icon>
       </v-btn>
@@ -100,6 +101,10 @@ export default {
     addItem() {
       this.clrSelection();
       this.$emit("addItem");
+    },
+    async editItem() {
+      await this.$emit("editItem");
+      this.clrSelection();
     },
     onDrawerClicked() {
       this.$emit("onDrawerClicked");

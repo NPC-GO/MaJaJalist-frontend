@@ -6,6 +6,7 @@
       @clearSelection="clearSelection"
       @onDrawerClicked="onDrawerClicked"
       @addItem="onAddButonClicked"
+      @editItem="onEditButtonClicked"
     ></ToolBar>
     <v-content transition="scroll-y-transition">
       <router-view @itemsPageInit="itemsPageInit" ref="child" />
@@ -37,9 +38,28 @@ export default {
   methods: {
     onDrawerClicked() {
       this.$refs.navdr.onDrawerClicked();
-      console.log("13213213");
     },
     onAddButonClicked() {
+      this.$store.dispatch("setEditorDialogConfig", {
+        mode: true,
+        text: "",
+        checked: false
+      });
+      this.pageDConfig.editorDialogKey++;
+      this.$store.dispatch("setPageDynamicConfig", {
+        name: "editorDialogStatus",
+        data: true
+      });
+    },
+    onEditButtonClicked() {
+      let itemIndex = this.selectedItemIndex[0];
+      let item = this.items[itemIndex];
+      this.$store.dispatch("setEditorDialogConfig", {
+        mode: false,
+        text: item.textContent,
+        checked: item.status.completed,
+        index: itemIndex
+      });
       this.pageDConfig.editorDialogKey++;
       this.$store.dispatch("setPageDynamicConfig", {
         name: "editorDialogStatus",
@@ -66,7 +86,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ pageDConfig: "getPageDynamicConfig" })
+    ...mapGetters({
+      pageDConfig: "getPageDynamicConfig",
+      selectedItemIndex: "getSelectionItemsByIndex",
+      items: "getTodo"
+    })
   },
   mounted() {
     this.$vuetify.theme.dark = true;

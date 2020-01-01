@@ -63,10 +63,14 @@ export default {
     checked: false,
     title: "新增項目",
     textAreaTextContent: "",
-    valid: true
+    valid: true,
+    hadlingItemIndex: 0
   }),
   computed: {
-    ...mapGetters({ pageDConfig: "getPageDynamicConfig" }),
+    ...mapGetters({
+      pageDConfig: "getPageDynamicConfig",
+      dialogConfig: "getEditorDialogConfig"
+    }),
     checkButtonIcon() {
       return this.checked ? "mdi-check-circle" : "mdi-alert-circle-outline";
     }
@@ -91,9 +95,24 @@ export default {
           }
         });
       } else {
+        this.$store.dispatch("changeTodo", [
+          {
+            index: this.hadlingItemIndex,
+            data: {
+              textContent: this.textAreaTextContent,
+              status: { completed: this.checked }
+            }
+          }
+        ]);
       }
       this.closeDialog();
     }
+  },
+  mounted() {
+    this.mode = this.dialogConfig.mode;
+    this.textAreaTextContent = this.dialogConfig.text;
+    this.checked = this.dialogConfig.checked;
+    this.hadlingItemIndex = this.dialogConfig.index;
   }
 };
 </script>
