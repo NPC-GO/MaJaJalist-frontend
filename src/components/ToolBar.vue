@@ -33,8 +33,12 @@
       </v-btn>
     </v-scale-transition>
     <v-scale-transition>
-      <v-btn v-if="pageDConfig.selectionMode" key="edit" icon>
-        <v-icon>mdi-pencil</v-icon>
+      <v-btn
+        v-if="pageDConfig.selectedItemInCurrentPage.length === 1"
+        key="edit"
+        icon
+      >
+        <v-icon color="amber">mdi-pencil</v-icon>
       </v-btn>
     </v-scale-transition>
     <v-menu right bottom>
@@ -93,12 +97,18 @@ export default {
       this.$emit("clearSelection");
       this.options[1].status = true;
     },
+    addItem() {
+      this.clrSelection();
+      this.$emit("addItem");
+    },
     onDrawerClicked() {
       this.$emit("onDrawerClicked");
     },
     onMenuClicked(option) {
       if (option.event === "edit") {
         this.editClicked(option);
+      } else if (option.event === "add") {
+        this.addItem();
       }
     },
     async editClicked(option) {

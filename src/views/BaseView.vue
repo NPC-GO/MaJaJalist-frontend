@@ -5,6 +5,7 @@
       ref="toptoolbar"
       @clearSelection="clearSelection"
       @onDrawerClicked="onDrawerClicked"
+      @addItem="onAddButonClicked"
     ></ToolBar>
     <v-content transition="scroll-y-transition">
       <router-view @itemsPageInit="itemsPageInit" ref="child" />
