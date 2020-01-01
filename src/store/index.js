@@ -50,12 +50,17 @@ export default new Vuex.Store({
       let item = state.Todos[`${data.index}`];
       item.textContent = data.data.textContent || item.textContent;
       item.status.completed = (function() {
-        if (data.data.status.completed === "origin") {
+        if (data.data.status.completed === undefined) {
           return item.status.completed;
         }
         return data.data.status.completed;
       })();
-      item.status.deleted = data.data.status.deleted || item.status.deleted;
+      item.status.deleted = (function() {
+        if (data.data.status.deleted === undefined) {
+          return item.status.deleted;
+        }
+        return data.data.status.deleted;
+      })();
       item.status.readonly = data.data.status.readonly || item.status.readonly;
       item.author = data.data.author || item.author;
     }

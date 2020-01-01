@@ -24,7 +24,10 @@
     <v-spacer />
     <v-scale-transition>
       <v-btn
-        v-if="pageDConfig.selectedItemInCurrentPage.length"
+        v-if="
+          this.now !== 'trashcan' &&
+            pageDConfig.selectedItemInCurrentPage.length
+        "
         key="markUnFinish"
         icon
         @click.stop="markAllUnfinish"
@@ -34,7 +37,10 @@
     </v-scale-transition>
     <v-scale-transition>
       <v-btn
-        v-if="pageDConfig.selectedItemInCurrentPage.length"
+        v-if="
+          this.now !== 'trashcan' &&
+            pageDConfig.selectedItemInCurrentPage.length
+        "
         key="markFinish"
         icon
         @click.stop="markAllFinish"
@@ -44,7 +50,10 @@
     </v-scale-transition>
     <v-scale-transition>
       <v-btn
-        v-if="pageDConfig.selectedItemInCurrentPage.length"
+        v-if="
+          this.now !== 'trashcan' &&
+            pageDConfig.selectedItemInCurrentPage.length
+        "
         key="delete"
         icon
         @click.stop="pushSelectedTrashcan"
@@ -54,7 +63,10 @@
     </v-scale-transition>
     <v-scale-transition>
       <v-btn
-        v-if="pageDConfig.selectedItemInCurrentPage.length === 1"
+        v-if="
+          this.now !== 'trashcan' &&
+            pageDConfig.selectedItemInCurrentPage.length === 1
+        "
         key="edit"
         icon
         @click="editItem"
@@ -62,9 +74,22 @@
         <v-icon color="amber">mdi-pencil</v-icon>
       </v-btn>
     </v-scale-transition>
+    <v-scale-transition>
+      <v-btn
+        v-if="
+          this.now === 'trashcan' &&
+            pageDConfig.selectedItemInCurrentPage.length === 1
+        "
+        key="revertDelete"
+        icon
+        @click="revertDelete"
+      >
+        <v-icon>mdi-delete-off</v-icon>
+      </v-btn>
+    </v-scale-transition>
     <v-menu right bottom>
       <template v-slot:activator="{ on }">
-        <v-btn icon v-on="on">
+        <v-btn icon v-on="on" v-show="now !== 'settings'">
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </template>
@@ -75,7 +100,7 @@
           :key="i"
           @click="onMenuClicked(n)"
         >
-          <v-icon class="mx-2" :color="n.status ? 'default' : 'gray'">{{
+          <v-icon class="mx-1" :color="n.status ? 'default' : 'gray'">{{
             n.icon
           }}</v-icon>
           <v-list-item-title>{{ n.name }}</v-list-item-title>
@@ -167,7 +192,18 @@ export default {
       this.SelectionItemsByIndex.forEach(element => {
         actions.push({
           index: element,
-          data: { status: { deleted: true, completed: "origin" } }
+          data: { status: { deleted: true } }
+        });
+      });
+      this.clrSelection();
+      this.$store.dispatch("changeTodo", actions);
+    },
+    revertDelete() {
+      let actions = [];
+      this.SelectionItemsByIndex.forEach(element => {
+        actions.push({
+          index: element,
+          data: { status: { deleted: false } }
         });
       });
       this.clrSelection();
@@ -177,8 +213,20 @@ export default {
   computed: {
     ...mapGetters({
       pageDConfig: "getPageDynamicConfig",
-      SelectionItemsByIndex: "getSelectionItemsByIndex"
+      SelectionItemsByIndex: "getSelectionItemsByIndex",
+      now: "getCurrentRouterName"
     })
+  },
+  watch: {
+    now() {
+      let dontShow = ["trashcan", "settings"];
+      let show = dontShow.findIndex(x => x === this.now);
+      if (show === -1) {
+        this.options[0].status = true;
+      } else {
+        this.options[0].status = false;
+      }
+    }
   }
 };
 </script>
