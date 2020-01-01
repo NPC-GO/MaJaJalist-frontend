@@ -40,6 +40,7 @@ export default {
       this.$refs.navdr.onDrawerClicked();
     },
     onAddButonClicked() {
+      this.resetSelections();
       this.$store.dispatch("setEditorDialogConfig", {
         mode: true,
         text: "",
@@ -82,6 +83,9 @@ export default {
         name: "selectionMode",
         data: false
       });
+      this.resetSelections();
+    },
+    resetSelections() {
       try {
         this.$refs.toptoolbar.clrSelection();
       } catch (e) {

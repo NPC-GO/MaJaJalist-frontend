@@ -103,7 +103,7 @@ export default new Vuex.Store({
       let list = state.pageDynamicConfig.selectedItemInCurrentPage;
       let listByItem = [];
       list.forEach(element =>
-        listByItem.push(list.findIndex(x => x === element))
+        listByItem.push(state.Todos.findIndex(x => x.id === element))
       );
       return listByItem;
     }

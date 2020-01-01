@@ -23,12 +23,31 @@
     </v-toolbar-title>
     <v-spacer />
     <v-scale-transition>
-      <v-btn v-if="pageDConfig.selectionMode" key="export" icon>
-        <v-icon>mdi-export-variant</v-icon>
+      <v-btn
+        v-if="pageDConfig.selectedItemInCurrentPage.length"
+        key="markUnFinish"
+        icon
+        @click.stop="markAllUnfinish"
+      >
+        <v-icon>mdi-alert-circle</v-icon>
       </v-btn>
     </v-scale-transition>
     <v-scale-transition>
-      <v-btn v-if="pageDConfig.selectionMode" key="delete" icon>
+      <v-btn
+        v-if="pageDConfig.selectedItemInCurrentPage.length"
+        key="markFinish"
+        icon
+        @click.stop="markAllFinish"
+      >
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+    </v-scale-transition>
+    <v-scale-transition>
+      <v-btn
+        v-if="pageDConfig.selectedItemInCurrentPage.length"
+        key="delete"
+        icon
+      >
         <v-icon>mdi-delete</v-icon>
       </v-btn>
     </v-scale-transition>
@@ -122,10 +141,32 @@ export default {
         name: "selectionMode",
         data: true
       });
+    },
+    markAllFinish() {
+      let actions = [];
+      this.SelectionItemsByIndex.forEach(element => {
+        actions.push({ index: element, data: { status: { completed: true } } });
+      });
+      this.clrSelection();
+      this.$store.dispatch("changeTodo", actions);
+    },
+    markAllUnfinish() {
+      let actions = [];
+      this.SelectionItemsByIndex.forEach(element => {
+        actions.push({
+          index: element,
+          data: { status: { completed: false } }
+        });
+      });
+      this.clrSelection();
+      this.$store.dispatch("changeTodo", actions);
     }
   },
   computed: {
-    ...mapGetters({ pageDConfig: "getPageDynamicConfig" })
+    ...mapGetters({
+      pageDConfig: "getPageDynamicConfig",
+      SelectionItemsByIndex: "getSelectionItemsByIndex"
+    })
   }
 };
 </script>
