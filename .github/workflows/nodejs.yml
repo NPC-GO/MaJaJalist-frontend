@@ -28,4 +28,4 @@ jobs:
         username: server
         password: ${{ secrets.ssh_password }}
         source: "dist/*"
-        target: "/home/server/MaJaJalist/dist/"
+        target: "MaJaJalist/dist"
