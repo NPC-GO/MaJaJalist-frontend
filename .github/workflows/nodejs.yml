@@ -1,16 +1,12 @@
 name: Node CI
-
 on: [push]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
-
+        node-version: [12.x]
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
@@ -24,3 +20,11 @@ jobs:
         npm test
       env:
         CI: true
+    - name: Copy via ssh
+      uses: garygrossgarten/github-action-scp@v0.5.3   
+      with:
+        host: ${{ secrets.ssh_host }}
+        username: server
+        password: ${{ secrets.ssh_password }}
+        local: "dist"
+        remote: "MaJaJalist/dist"
