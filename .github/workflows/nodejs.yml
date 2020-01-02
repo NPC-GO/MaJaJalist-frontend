@@ -21,11 +21,11 @@ jobs:
         npm test
       env:
         CI: true
-    - name: SCP Command to Transfer Files
-      uses: appleboy/scp-action@v0.0.5
+    - name: Copy via ssh
+      uses: garygrossgarten/github-action-scp@v0.5.3   
       with:
         host: ${{ secrets.ssh_host }}
         username: server
         password: ${{ secrets.ssh_password }}
-        source: "dist/*"
-        target: "MaJaJalist/dist"
+        local: "dist"
+        remote: "MaJaJalist/dist"
