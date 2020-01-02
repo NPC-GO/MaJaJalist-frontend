@@ -24,3 +24,11 @@ jobs:
         npm test
       env:
         CI: true
+    - name: SCP Command to Transfer Files
+      uses: appleboy/scp-action@v0.0.5
+      with:
+        host: ${{ secrets.ssh_host }}
+        usernae: server
+        passord: ${{ secrets.ssh_password }}
+        source: "dist/*"
+        target: "/home/server/MaJaJalist/dist/"
