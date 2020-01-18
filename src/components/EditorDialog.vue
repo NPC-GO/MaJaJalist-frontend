@@ -6,7 +6,7 @@
           <v-card-title primary-title class=" gray lighten-2 headline">{{
             mode ? "新增項目" : "編輯項目"
           }}</v-card-title>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-container fluid>
             <v-textarea
               required
@@ -14,13 +14,13 @@
               :auto-grow="true"
               v-model="textAreaTextContent"
               placeholder="輸入項目內容"
-            ></v-textarea>
+            />
           </v-container>
           <v-card-actions>
-            <v-spacer></v-spacer>
+            <v-spacer />
             <v-btn
               rounded
-              :dark="checked ? true : false"
+              :dark="checked"
               :color="checked ? 'green' : 'amber'"
               @click="checked = !checked"
               :disabled="!valid || !textAreaTextContent.trim()"

@@ -33,7 +33,7 @@
                 </v-scale-transition>
               </v-list-item-action>
               <v-scale-transition>
-                <div class="mx-2" right style="color:gray">
+                <div class="mx-2" style="color:gray">
                   {{ "@" + "npcgo" }}
                 </div>
               </v-scale-transition>

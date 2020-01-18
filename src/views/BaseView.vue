@@ -2,19 +2,19 @@
   <v-app id="inspire">
     <NavDrawer ref="navdr" />
     <ToolBar
-      ref="toptoolbar"
+      @addItem="onAddButtonClicked"
       @clearSelection="clearSelection"
-      @onDrawerClicked="onDrawerClicked"
-      @addItem="onAddButonClicked"
       @editItem="onEditButtonClicked"
-    ></ToolBar>
+      @onDrawerClicked="onDrawerClicked"
+      ref="toptoolbar"
+    />
     <v-content transition="scroll-y-transition">
       <router-view @itemsPageInit="itemsPageInit" ref="child" />
       <bg />
     </v-content>
     <FloatButton
+      @onClick="onAddButtonClicked"
       v-show="floatButtonShowRealTime"
-      @onClick="onAddButonClicked"
     />
     <EDialog :key="pageDConfig.editorDialogKey" />
     <FooterCard />
@@ -28,6 +28,7 @@ const FooterCard = () => import("@/components/FooterCard");
 const bg = () => import("@/components/MainContentBackground");
 const EDialog = () => import("@/components/EditorDialog");
 import { mapGetters } from "vuex";
+
 export default {
   name: "baseview",
   components: {
@@ -42,7 +43,7 @@ export default {
     onDrawerClicked() {
       this.$refs.navdr.onDrawerClicked();
     },
-    onAddButonClicked() {
+    onAddButtonClicked() {
       this.resetSelections();
       this.$store.dispatch("setEditorDialogConfig", {
         mode: true,
@@ -91,17 +92,12 @@ export default {
     resetSelections() {
       try {
         this.$refs.toptoolbar.clrSelection();
-      } catch (e) {
-        return;
-      }
+      } catch (e) {}
     },
     floatButtonShow() {
       let dontShow = ["trashcan"];
       let show = dontShow.findIndex(x => x === this.currentRoute);
-      if (show === -1) {
-        return true;
-      }
-      return false;
+      return show === -1;
     }
   },
   computed: {
@@ -114,10 +110,7 @@ export default {
     floatButtonShowRealTime() {
       let dontShow = ["trashcan", "settings"];
       let show = dontShow.findIndex(x => x === this.now);
-      if (show === -1) {
-        return true;
-      }
-      return false;
+      return show === -1;
     }
   },
   mounted() {

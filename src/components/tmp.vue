@@ -4,7 +4,7 @@
       :color="selection.length ? 'grey darken-4' : 'deep-purple accent-4'"
       dark
     >
-      <v-app-bar-nav-icon v-if="!selection.length"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon v-if="!selection.length" />
       <v-btn v-else icon @click="selection = []">
         <v-icon>mdi-close</v-icon>
       </v-btn>
@@ -13,7 +13,7 @@
         {{ selection.length ? `${selection.length} selected` : "Photos" }}
       </v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-scale-transition>
         <v-btn v-if="selection.length" key="export" icon>
@@ -37,7 +37,7 @@
         :items="items"
         multiple
         label="Select an option"
-      ></v-select>
+      />
     </v-card-text> </v-card
 ></template>
 <script>

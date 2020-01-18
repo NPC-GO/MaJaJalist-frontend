@@ -8,7 +8,7 @@
           max-width="229"
           max-height="264"
           justify="center"
-        ></v-img>
+        />
       </v-col>
     </v-row>
   </v-container>
