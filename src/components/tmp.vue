@@ -41,9 +41,6 @@
     </v-card-text> </v-card
 ></template>
 <script>
-import vuetify from "@/plugins/vuetify";
-import App from "@/App.vue";
-import Vue from "vue";
 export default {
   data: () => ({
     selection: [],
