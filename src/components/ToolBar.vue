@@ -78,7 +78,7 @@
       <v-btn
         v-if="
           this.now === 'trashcan' &&
-            pageDConfig.selectedItemInCurrentPage.length === 1
+            pageDConfig.selectedItemInCurrentPage.length
         "
         key="revertDelete"
         icon
@@ -221,11 +221,7 @@ export default {
     now() {
       let dontShow = ["trashcan", "settings"];
       let show = dontShow.findIndex(x => x === this.now);
-      if (show === -1) {
-        this.options[0].status = true;
-      } else {
-        this.options[0].status = false;
-      }
+      this.options[0].status = show === -1;
     }
   }
 };
