@@ -32,7 +32,9 @@ export default new Vuex.Store({
       editorDialogKey: -1,
       currentPage: null,
       selectedItemInCurrentPage: [],
-      selectionMode: false
+      selectionMode: false,
+      msgBoxStatus: false,
+      msgBoxKey: -1
     },
     editorDialogConfig: { mode: true, text: "", checked: false }
   },
