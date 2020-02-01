@@ -29,12 +29,15 @@ export default new Vuex.Store({
     })(),
     pageDynamicConfig: {
       editorDialogStatus: false,
-      editorDialogKey: -1,
+      editorDialogKey: 100,
       currentPage: null,
       selectedItemInCurrentPage: [],
-      selectionMode: false
+      selectionMode: false,
+      msgBoxStatus: false,
+      msgBoxKey: 1
     },
-    editorDialogConfig: { mode: true, text: "", checked: false }
+    editorDialogConfig: { mode: true, text: "", checked: false },
+    msgBoxConfig: { title: "", content: "", submit: null }
   },
   mutations: {
     SET_PAGE_DYNAMIC_CONFIG(state, data) {
@@ -45,6 +48,9 @@ export default new Vuex.Store({
     },
     SET_EDITOR_DIALOG_CONFIG(state, data) {
       state.editorDialogConfig = data;
+    },
+    SET_MSG_BOX_CONFIG(state, data) {
+      state.msgBoxConfig = data;
     },
     CHANGE_TODO(state, data) {
       let item = state.Todos[`${data.index}`];
@@ -63,6 +69,9 @@ export default new Vuex.Store({
       })();
       item.status.readonly = data.data.status.readonly || item.status.readonly;
       item.author = data.data.author || item.author;
+    },
+    DELETE_TODO(state, data) {
+      state.Todos.splice(data, 1);
     }
   },
   actions: {
@@ -71,6 +80,9 @@ export default new Vuex.Store({
     },
     setEditorDialogConfig({ commit }, data) {
       commit("SET_EDITOR_DIALOG_CONFIG", data);
+    },
+    setMsgBoxConfig({ commit }, data) {
+      commit("SET_MSG_BOX_CONFIG", data);
     },
     addTodo({ commit, state }, data) {
       data.id = require("js-sha256").sha256(data.textContent + Date.now());
@@ -81,6 +93,13 @@ export default new Vuex.Store({
     },
     changeTodo({ commit }, data) {
       data.forEach(element => commit("CHANGE_TODO", element));
+    },
+    foreverDeleteItems({ commit }, data) {
+      data.sort();
+      let i = data.length;
+      while (i--) {
+        commit("DELETE_TODO", data[i]);
+      }
     }
   },
   getters: {
@@ -108,6 +127,9 @@ export default new Vuex.Store({
     },
     getEditorDialogConfig(state) {
       return state.editorDialogConfig;
+    },
+    getMsgBoxConfig(state) {
+      return state.msgBoxConfig;
     },
     getSelectionItemsByIndex(state) {
       let list = state.pageDynamicConfig.selectedItemInCurrentPage;

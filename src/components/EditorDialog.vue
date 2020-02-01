@@ -64,7 +64,7 @@ export default {
     title: "新增項目",
     textAreaTextContent: "",
     valid: true,
-    hadlingItemIndex: 0
+    handlingItemIndex: 0
   }),
   computed: {
     ...mapGetters({
@@ -82,9 +82,6 @@ export default {
         data: false
       });
     },
-    onCheckButtonClick() {
-      this.checked = !this.checked;
-    },
     submitDialog() {
       if (this.mode) {
         //add item
@@ -97,7 +94,7 @@ export default {
       } else {
         this.$store.dispatch("changeTodo", [
           {
-            index: this.hadlingItemIndex,
+            index: this.handlingItemIndex,
             data: {
               textContent: this.textAreaTextContent,
               status: { completed: this.checked }
@@ -112,7 +109,7 @@ export default {
     this.mode = this.dialogConfig.mode;
     this.textAreaTextContent = this.dialogConfig.text;
     this.checked = this.dialogConfig.checked;
-    this.hadlingItemIndex = this.dialogConfig.index;
+    this.handlingItemIndex = this.dialogConfig.index;
   }
 };
 </script>

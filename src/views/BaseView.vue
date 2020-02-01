@@ -17,6 +17,7 @@
       v-show="floatButtonShowRealTime"
     />
     <EDialog :key="pageDConfig.editorDialogKey" />
+    <MsgBox :key="pageDConfig.msgBoxKey" />
     <FooterCard />
   </v-app>
 </template>
@@ -27,6 +28,7 @@ const ToolBar = () => import("@/components/ToolBar");
 const FooterCard = () => import("@/components/FooterCard");
 const bg = () => import("@/components/MainContentBackground");
 const EDialog = () => import("@/components/EditorDialog");
+const MsgBox = () => import("@/components/MsgBox");
 import { mapGetters } from "vuex";
 
 export default {
@@ -37,7 +39,8 @@ export default {
     ToolBar,
     FooterCard,
     bg,
-    EDialog
+    EDialog,
+    MsgBox
   },
   methods: {
     onDrawerClicked() {
@@ -93,11 +96,6 @@ export default {
       try {
         this.$refs.toptoolbar.clrSelection();
       } catch (e) {}
-    },
-    floatButtonShow() {
-      let dontShow = ["trashcan"];
-      let show = dontShow.findIndex(x => x === this.currentRoute);
-      return show === -1;
     }
   },
   computed: {

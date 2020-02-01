@@ -78,13 +78,26 @@
       <v-btn
         v-if="
           this.now === 'trashcan' &&
-            pageDConfig.selectedItemInCurrentPage.length === 1
+            pageDConfig.selectedItemInCurrentPage.length
         "
         key="revertDelete"
         icon
         @click="revertDelete"
       >
         <v-icon>mdi-delete-off</v-icon>
+      </v-btn>
+    </v-scale-transition>
+    <v-scale-transition>
+      <v-btn
+        v-if="
+          this.now === 'trashcan' &&
+            pageDConfig.selectedItemInCurrentPage.length
+        "
+        key="deleteForever"
+        icon
+        @click="deleteForever"
+      >
+        <v-icon color="red">mdi-delete-forever</v-icon>
       </v-btn>
     </v-scale-transition>
     <v-menu right bottom>
@@ -112,6 +125,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import Vuex from "vuex";
 export default {
   name: "toolbar",
   data: () => ({
@@ -208,6 +222,23 @@ export default {
       });
       this.clrSelection();
       this.$store.dispatch("changeTodo", actions);
+    },
+    deleteForever() {
+      let vm = this;
+      let selectionItemsByIndex = this.SelectionItemsByIndex;
+      this.$store.dispatch("setMsgBoxConfig", {
+        title: "警告",
+        content: "確定要永久刪除這些項目嗎？",
+        submit: function() {
+          vm.$store.dispatch("foreverDeleteItems", selectionItemsByIndex);
+        }
+      });
+      this.clrSelection();
+      this.pageDConfig.msgBoxKey++;
+      this.$store.dispatch("setPageDynamicConfig", {
+        name: "msgBoxStatus",
+        data: true
+      });
     }
   },
   computed: {
@@ -221,11 +252,7 @@ export default {
     now() {
       let dontShow = ["trashcan", "settings"];
       let show = dontShow.findIndex(x => x === this.now);
-      if (show === -1) {
-        this.options[0].status = true;
-      } else {
-        this.options[0].status = false;
-      }
+      this.options[0].status = show === -1;
     }
   }
 };
