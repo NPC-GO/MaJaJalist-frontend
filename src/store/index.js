@@ -49,6 +49,9 @@ export default new Vuex.Store({
     SET_EDITOR_DIALOG_CONFIG(state, data) {
       state.editorDialogConfig = data;
     },
+    SET_MSG_BOX_CONFIG(state, data) {
+      state.msgBoxConfig = data;
+    },
     CHANGE_TODO(state, data) {
       let item = state.Todos[`${data.index}`];
       item.textContent = data.data.textContent || item.textContent;
@@ -74,6 +77,9 @@ export default new Vuex.Store({
     },
     setEditorDialogConfig({ commit }, data) {
       commit("SET_EDITOR_DIALOG_CONFIG", data);
+    },
+    setMsgBoxConfig({ commit }, data) {
+      commit("SET_MSG_BOX_CONFIG", data);
     },
     addTodo({ commit, state }, data) {
       data.id = require("js-sha256").sha256(data.textContent + Date.now());

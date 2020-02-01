@@ -9,10 +9,8 @@
         <v-card-text>{{ content }} </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn @click="closeBox" color="green darken-1" text>Disagree </v-btn>
-          <v-btn @click="boxConfig.submit" color="green darken-1" text
-            >Agree
-          </v-btn>
+          <v-btn @click="closeBox" color="green darken-1" text>取消 </v-btn>
+          <v-btn @click="submit" color="green darken-1" text>確定 </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -41,7 +39,15 @@ export default {
         name: "msgBoxStatus",
         data: false
       });
+    },
+    submit() {
+      this.boxConfig.submit();
+      this.closeBox();
     }
+  },
+  mounted() {
+    this.title = this.boxConfig.title;
+    this.content = this.boxConfig.content;
   }
 };
 </script>

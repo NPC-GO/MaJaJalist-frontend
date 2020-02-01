@@ -222,7 +222,21 @@ export default {
       this.clrSelection();
       this.$store.dispatch("changeTodo", actions);
     },
-    deleteForever() {}
+    deleteForever() {
+      this.clrSelection();
+      this.$store.dispatch("setMsgBoxConfig", {
+        title: "",
+        content: "",
+        submit: function() {
+          console.log("123123123123123");
+        }
+      });
+      this.pageDConfig.msgBoxKey++;
+      this.$store.dispatch("setPageDynamicConfig", {
+        name: "msgBoxStatus",
+        data: true
+      });
+    }
   },
   computed: {
     ...mapGetters({
