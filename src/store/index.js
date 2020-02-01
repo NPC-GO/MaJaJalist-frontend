@@ -95,10 +95,10 @@ export default new Vuex.Store({
       data.forEach(element => commit("CHANGE_TODO", element));
     },
     foreverDeleteItems({ commit }, data) {
-      console.log(data);
+      data.sort();
       let i = data.length;
       while (i--) {
-        commit("DELETE_TODO", i);
+        commit("DELETE_TODO", data[i]);
       }
     }
   },
