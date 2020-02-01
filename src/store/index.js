@@ -29,14 +29,15 @@ export default new Vuex.Store({
     })(),
     pageDynamicConfig: {
       editorDialogStatus: false,
-      editorDialogKey: -1,
+      editorDialogKey: 100,
       currentPage: null,
       selectedItemInCurrentPage: [],
       selectionMode: false,
       msgBoxStatus: false,
-      msgBoxKey: -1
+      msgBoxKey: 1
     },
-    editorDialogConfig: { mode: true, text: "", checked: false }
+    editorDialogConfig: { mode: true, text: "", checked: false },
+    msgBoxConfig: { title: "", content: "", submit: null }
   },
   mutations: {
     SET_PAGE_DYNAMIC_CONFIG(state, data) {
@@ -110,6 +111,9 @@ export default new Vuex.Store({
     },
     getEditorDialogConfig(state) {
       return state.editorDialogConfig;
+    },
+    getMsgBoxConfig(state) {
+      return state.msgBoxConfig;
     },
     getSelectionItemsByIndex(state) {
       let list = state.pageDynamicConfig.selectedItemInCurrentPage;

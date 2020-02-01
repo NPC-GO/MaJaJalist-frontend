@@ -87,6 +87,19 @@
         <v-icon>mdi-delete-off</v-icon>
       </v-btn>
     </v-scale-transition>
+    <v-scale-transition>
+      <v-btn
+        v-if="
+          this.now === 'trashcan' &&
+            pageDConfig.selectedItemInCurrentPage.length
+        "
+        key="deleteForever"
+        icon
+        @click="deleteForever"
+      >
+        <v-icon color="red">mdi-delete-forever</v-icon>
+      </v-btn>
+    </v-scale-transition>
     <v-menu right bottom>
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on" v-show="now !== 'settings'">
@@ -208,7 +221,8 @@ export default {
       });
       this.clrSelection();
       this.$store.dispatch("changeTodo", actions);
-    }
+    },
+    deleteForever() {}
   },
   computed: {
     ...mapGetters({

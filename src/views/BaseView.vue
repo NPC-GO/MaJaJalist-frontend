@@ -96,11 +96,6 @@ export default {
       try {
         this.$refs.toptoolbar.clrSelection();
       } catch (e) {}
-    },
-    floatButtonShow() {
-      let dontShow = ["trashcan"];
-      let show = dontShow.findIndex(x => x === this.currentRoute);
-      return show === -1;
     }
   },
   computed: {
