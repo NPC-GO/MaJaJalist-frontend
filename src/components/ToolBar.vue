@@ -227,8 +227,8 @@ export default {
       let vm = this;
       let selectionItemsByIndex = this.SelectionItemsByIndex;
       this.$store.dispatch("setMsgBoxConfig", {
-        title: "",
-        content: "",
+        title: "警告",
+        content: "確定要永久刪除這些項目嗎？",
         submit: function() {
           vm.$store.dispatch("foreverDeleteItems", selectionItemsByIndex);
         }
