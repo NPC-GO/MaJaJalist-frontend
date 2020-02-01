@@ -125,6 +125,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import Vuex from "vuex";
 export default {
   name: "toolbar",
   data: () => ({
@@ -223,14 +224,16 @@ export default {
       this.$store.dispatch("changeTodo", actions);
     },
     deleteForever() {
-      this.clrSelection();
+      let vm = this;
+      let selectionItemsByIndex = this.SelectionItemsByIndex;
       this.$store.dispatch("setMsgBoxConfig", {
         title: "",
         content: "",
         submit: function() {
-          console.log("123123123123123");
+          vm.$store.dispatch("foreverDeleteItems", selectionItemsByIndex);
         }
       });
+      this.clrSelection();
       this.pageDConfig.msgBoxKey++;
       this.$store.dispatch("setPageDynamicConfig", {
         name: "msgBoxStatus",

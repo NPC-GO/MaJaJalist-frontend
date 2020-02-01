@@ -69,6 +69,9 @@ export default new Vuex.Store({
       })();
       item.status.readonly = data.data.status.readonly || item.status.readonly;
       item.author = data.data.author || item.author;
+    },
+    DELETE_TODO(state, data) {
+      state.Todos.splice(data, 1);
     }
   },
   actions: {
@@ -90,6 +93,13 @@ export default new Vuex.Store({
     },
     changeTodo({ commit }, data) {
       data.forEach(element => commit("CHANGE_TODO", element));
+    },
+    foreverDeleteItems({ commit }, data) {
+      console.log(data);
+      let i = data.length;
+      while (i--) {
+        commit("DELETE_TODO", i);
+      }
     }
   },
   getters: {
