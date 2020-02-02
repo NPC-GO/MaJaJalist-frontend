@@ -34,6 +34,7 @@ jobs:
         source: "dist/*"
         target: "MaJaJalist/dist"
         rm: true
+        overwrite: true
     - name: Deploy to server
       uses: appleboy/ssh-action@v0.0.7
       with:
