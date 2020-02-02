@@ -42,4 +42,4 @@ jobs:
         script_stop: true
         script: |
           cd MaJaJalist
-          sudo docker-compose restart
+          sudo docker restart majajalist_MaJaJaserver_1
