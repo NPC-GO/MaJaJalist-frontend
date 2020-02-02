@@ -33,3 +33,13 @@ jobs:
         password: ${{ secrets.ssh_password }}
         local: "dist"
         remote: "MaJaJalist/dist"
+    - name: Deploy to server
+      uses: appleboy/ssh-action@v0.0.7
+      with:
+        host: ${{ secrets.ssh_host }}
+        username: server
+        password: ${{ secrets.ssh_password }}
+        script_stop: true
+        script: |
+          cd MaJaJalist
+          sudo docker-compose restart
