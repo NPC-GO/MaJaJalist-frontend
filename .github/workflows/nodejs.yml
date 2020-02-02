@@ -33,7 +33,7 @@ jobs:
         password: ${{ secrets.ssh_password }}
         source: "dist/*"
         target: "MaJaJalist/dist"
-        rm: "MaJaJalist/dist"
+        rm: true
     - name: Deploy to server
       uses: appleboy/ssh-action@v0.0.7
       with:
