@@ -1,4 +1,5 @@
 # majajalist-frontend
+[![CodeFactor](https://www.codefactor.io/repository/github/npc-go/majajalist-frontend/badge)](https://www.codefactor.io/repository/github/npc-go/majajalist-frontend)
 
 ## Project setup
 ```
