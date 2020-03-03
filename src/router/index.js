@@ -7,6 +7,7 @@ const NotDonePage = () => import("@/components/NotDonePage");
 const DonePage = () => import("@/components/DonePage");
 const TrashCan = () => import("@/components/TrashCan");
 const Settings = () => import("@/components/Settings");
+const Login = () => import("@/components/Login");
 
 Vue.use(VueRouter);
 
@@ -47,6 +48,11 @@ const routes = [
     path: "/test",
     name: "test",
     component: () => import("@/components/tmp")
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   }
 ];
 

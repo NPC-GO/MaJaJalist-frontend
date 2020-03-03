@@ -9,9 +9,9 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>
 
-      <v-toolbar-title>
-        {{ selection.length ? `${selection.length} selected` : "Photos" }}
-      </v-toolbar-title>
+      <v-toolbar-title>{{
+        selection.length ? `${selection.length} selected` : "Photos"
+      }}</v-toolbar-title>
 
       <v-spacer />
 
@@ -38,8 +38,9 @@
         multiple
         label="Select an option"
       />
-    </v-card-text> </v-card
-></template>
+    </v-card-text>
+  </v-card>
+</template>
 <script>
 export default {
   data: () => ({
